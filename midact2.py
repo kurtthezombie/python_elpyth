@@ -129,12 +129,12 @@ def main()->None:
                 if option is 0:
                     quit()
                     break
-                elif not option in range (0,5):
-                    print("Invalid input!")
+                if not option in range (0,5):
+                    print("(0..5) only!")
                 else:
                     getoption(option)
             except:
-                print("Invalid input!")
+                print("Invalid Input!")
             finally:
                 input("Press any key to continue...")
     else:
