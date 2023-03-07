@@ -39,7 +39,6 @@ def findstudent():
     if not check:
         print("Student not found!")
 
-
 def deletestudent():
     system("cls")
     print("Delete Student")
