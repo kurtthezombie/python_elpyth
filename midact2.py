@@ -24,6 +24,7 @@ def addstudent():
     students.append(student)
 
 def findstudent():
+    system('cls')
     print("Find Student")
     print("------------------")
     idnum:str = input("IDNO     :")
@@ -40,14 +41,42 @@ def findstudent():
 
 
 def deletestudent():
-    print("delete student")
+    system("cls")
+    print("Delete Student")
+    print("------------------")
 
+    global students
+    idnum:str = input("IDNO     :")
+    check = False
+
+    for x in students:
+        if x.get('idno') == idnum:    
+            print(f"LASTNAME :{x.get('lastname')}")
+            print(f"FIRSTNAME:{x.get('firstname')}")
+            print(f"COURSE   :{x.get('course')}")
+            print(f"LEVEL    :{x.get('level')}")
+            check = True
+            break
+    if not check:
+        print("Student not found!")
+    else:
+        while True:
+            choice = input(f"Do you really want to remove Student: {idnum} (y/n)? ")
+            if choice.lower() == "y":
+                print("---STUDENT DELETED---")
+                students.remove(x)
+                break
+            elif choice.lower() == "n":
+                print("---DELETION CANCELLED---")
+                break
+            else:
+                print("Input y or n only!")
+           
 def showallstudent():
     global students
     system("cls")
     print("Student List")
     print("------------------")
-
     for x in students:
         studentval:list = x.values()
         [print(y, end = " ", flush = True) for y in studentval]
