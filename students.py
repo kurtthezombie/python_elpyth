@@ -1,5 +1,4 @@
 from os import system
-from pwinput import pwinput
 
 students:list = []
 
@@ -24,20 +23,7 @@ def addstudent():
     students.append(student)
 
 def findstudent():
-    print("Find Student")
-    print("------------------")
-    idnum:str = input("IDNO     :")
-    check = False
-    for x in students:
-        if x.get('idno') == idnum:    
-            print(f"LASTNAME :{x.get('lastname')}")
-            print(f"FIRSTNAME:{x.get('firstname')}")
-            print(f"COURSE   :{x.get('course')}")
-            print(f"LEVEL    :{x.get('level')}")
-            check = True
-    if not check:
-        print("Student not found!")
-
+    print("findstudent")
 
 def deletestudent():
     print("delete student")
@@ -52,7 +38,6 @@ def showallstudent():
         studentval:list = x.values()
         [print(y, end = " ", flush = True) for y in studentval]
         print("")
-    print("------------------")
 
 def quit():
     print("--Program Terminated--")
@@ -80,20 +65,8 @@ def getoption(option:int):
     }
     return options.get(option)()
 
-def login():
-    system("cls")
-    user:str = input("Username: ")
-    passw:str = pwinput(prompt="Password: ", mask ="•")
-    if user == "admin" and passw == "user":
-        print(f"Welcome back, {user}.")
-    else:
-        print("Invalid User!")
-        input("Press any key to continue...")
-        login()
 
 def main()->None:
-    login()
-    input("Press any key to continue...")
     while True:
         displaymenu()
         try:
