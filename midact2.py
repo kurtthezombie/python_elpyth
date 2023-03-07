@@ -136,7 +136,7 @@ def main()->None:
             except:
                 print("Invalid Input!")
             finally:
-                input("Press any key to continue...")
+                input("Press Enter to continue...")
     else:
         print("Invalid User!")
         quit()
