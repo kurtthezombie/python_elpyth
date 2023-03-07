@@ -129,7 +129,7 @@ def main()->None:
                 if option is 0:
                     quit()
                     break
-                if not option in range (0,5):
+                elif option not in range (0,5):
                     print("(0..5) only!")
                 else:
                     getoption(option)
