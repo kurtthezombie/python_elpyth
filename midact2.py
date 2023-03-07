@@ -37,7 +37,7 @@ def findstudent():
             print(f"LEVEL    :{x.get('level')}")
             check = True
     if not check:
-        print("Student not found!")
+        print("STUDENT NOT FOUND!")
 
 def deletestudent():
     system("cls")
@@ -57,7 +57,7 @@ def deletestudent():
             check = True
             break
     if not check:
-        print("Student not found!")
+        print("STUDENT NOT FOUND!")
     else:
         while True:
             choice = input(f"Do you really want to remove Student: {idnum} (y/n)? ")
@@ -109,34 +109,37 @@ def getoption(option:int):
     return options.get(option)()
 
 def login():
+    gate = False
     system("cls")
     user:str = input("Username: ")
     passw:str = pwinput(prompt="Password: ", mask ="•")
     if user == "admin" and passw == "user":
         print(f"Welcome back, {user}.")
-    else:
-        print("Invalid User!")
-        input("Press any key to continue...")
-        login()
+        gate = True
+        
+    return gate
 
 def main()->None:
-    login()
-    input("Press any key to continue...")
-    while True:
-        displaymenu()
-        try:
-            option = int(input("Enter option(0..4): "))
-            if option is 0:
-                quit()
-                break
-            elif not option in range (0,5):
+    gate:bool = login()
+    if gate:
+        while True:
+            displaymenu()
+            try:
+                option = int(input("Enter option(0..4): "))
+                if option is 0:
+                    quit()
+                    break
+                elif not option in range (0,5):
+                    print("Invalid input!")
+                else:
+                    getoption(option)
+            except:
                 print("Invalid input!")
-            else:
-                getoption(option)
-        except:
-            print("Invalid input!")
-        finally:
-            input("Press any key to continue...")
+            finally:
+                input("Press any key to continue...")
+    else:
+        print("Invalid User!")
+        quit()
 
 if __name__ == "__main__":
     main()
