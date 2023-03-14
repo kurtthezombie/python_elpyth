@@ -1,12 +1,2 @@
-
-message = input(">")
-words = message.split()
-emojis = {
-    ":)":"🙂",
-    ":(":"☹️",
-    ":|":"😐",
-    "B)":"😎",
-    "<3":"💖"
-}
-print("I like food")
-[print(emojis.get(word,word), end = " ") for word in words]
+x = 1
+if x == 1: print("X is 1")
