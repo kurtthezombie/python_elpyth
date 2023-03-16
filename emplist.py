@@ -110,6 +110,21 @@ def genpayroll():
                 print(y,end=" ")
             print()
 
+def delpayroll():
+    header("Delete Payroll")
+    idno = input("IDNO: ")
+    global payroll_list
+    for item in payroll_list:
+        if item[0] == idno:
+            [print(itemval, end = " ") for itemval in item]
+            print()
+            choice = input("Delete this student(y/n): ")
+            if choice.lower() =='y':
+                payroll_list.remove(item)
+                print(f"--Employee {idno} DELETED--")
+            else: print("--Deletion Cancelled--")
+            break
+
 def quit():
     system('cls')
     savelist(payroll_list)
@@ -130,6 +145,7 @@ def getmenuoption(option:int):
         2:displayallemp,
         3:daysworked,
         4:genpayroll,
+        5:delpayroll,
         0:quit
     }
     return options.get(option)()
@@ -141,6 +157,7 @@ def showmenu():
         "2. Display All Employee",
         "3. Add number of day(s) worked",
         "4. Generate payroll",
+        "5. Delete payroll",
         "0. Quit/End",
     )
     header("Menu")
