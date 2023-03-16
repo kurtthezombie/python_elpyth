@@ -19,7 +19,7 @@ def loadlist()->list:
     for item in f:
         if item.strip()=="": pass
         else:
-            item_list = item.strip().split(',')
+            item_list = item.strip().split(' ')
             mlist.append(item_list)
     f.close()
     return mlist
