@@ -1,28 +1,9 @@
 from os import system
+from empfilehandler import loadlist, savelist
 
 emplist:list = []
 poslist:list = []
 empposlist:list = []
-
-#filehandling
-filename:str = "payroll.csv"
-def savelist(payroll_list:list)->None:
-    f = open(filename, 'w')
-    for employee in payroll_list:
-        emp = " ".join(employee)
-        f.write(emp+"\n")
-    f.close()
-
-def loadlist()->list:
-    f = open("payroll.csv", "r")
-    mlist: list = []
-    for item in f:
-        if item.strip()=="": pass
-        else:
-            item_list = item.strip().split(' ')
-            mlist.append(item_list)
-    f.close()
-    return mlist
 
 #payroll list
 payroll_list:list = loadlist()
@@ -112,18 +93,26 @@ def genpayroll():
 
 def delpayroll():
     header("Delete Payroll")
-    idno = input("IDNO: ")
+    
+    found = False
     global payroll_list
-    for item in payroll_list:
-        if item[0] == idno:
-            [print(itemval, end = " ") for itemval in item]
-            print()
-            choice = input("Delete this student(y/n): ")
-            if choice.lower() =='y':
-                payroll_list.remove(item)
-                print(f"--Employee {idno} DELETED--")
-            else: print("--Deletion Cancelled--")
-            break
+    if len(payroll_list)==0: 
+        print("List is Empty")
+        found = True 
+    else:
+        idno = input("IDNO: ")
+        for item in payroll_list:
+            if item[0] == idno:
+                found = True
+                [print(itemval, end = " ") for itemval in item]
+                print()
+                choice = input("Delete this student(y/n): ")
+                if choice.lower() =='y':
+                    payroll_list.remove(item)
+                    print(f"--Employee {idno} DELETED--")
+                else: print("--Deletion Cancelled--")
+                break
+    if not found: print("Employee NOT FOUND")
 
 def quit():
     system('cls')

@@ -1,10 +1,11 @@
-from emplist import payroll_list
+
 filename:str = "payroll.csv"
+
 def savelist(payroll_list:list)->None:
-    f = open(filename, 'w')
+    f = open(filename, "w")
     for employee in payroll_list:
-        f.write(employee.strip())
-        f.write("\n")
+        emp = " ".join(employee)
+        f.write(emp+"\n")
     f.close()
 
 def loadlist()->list:
@@ -13,6 +14,7 @@ def loadlist()->list:
     for item in f:
         if item.strip()=="": pass
         else:
-            myitem:list = item.split(",")
-            mlist.append(payroll_list)
+            item_list = item.strip().split(' ')
+            mlist.append(item_list)
+    f.close()
     return mlist
