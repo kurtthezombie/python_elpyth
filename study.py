@@ -1,2 +1,4 @@
-x = 1
-if x == 1: print("X is 1")
+from os import system
+system('cls')
+
+[print(x, end=",") for x in range (10,60)]
