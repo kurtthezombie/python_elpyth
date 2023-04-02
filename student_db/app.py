@@ -5,7 +5,7 @@ from model.studentmodel import *
 from model.usermodel import *
 from student import *
 
-
+table = 'student'
 stlist:list = []
 
 def addstudent(**kwargs)->bool:
@@ -22,19 +22,37 @@ def addstudent(**kwargs)->bool:
 
 def findstudent(*args)->bool:
     toplabel("Find Student")
+    global table
     id = int(input("ID: "))
-    ok = getrecord('student',[id])
+    ok = getrecord(table,[id])
     if ok:
-        record = getrecord('student',[id]).values()
+        record = getrecord(table,[id]).values()
         [print(stud, end=" ") for stud in record]
         print()
     else:
-        print("Student not found")
+        print("Student NOT FOUND")
     print("------------------------------")
     return ok
 
 def deletestudent()->bool:
     toplabel("Delete Student")
+    delid = int(input("ID: "))
+    ok = getrecord('student',[delid])
+    if ok:
+        record = getrecord('student',[delid]).values()
+        [print(stud, end=" ") for stud in record]
+        print()
+        ##yes or no to delete
+        choice = input("Delete student record(y/n)? ").lower()
+        if choice == 'y':
+            deleted = deleterecord('student', [delid])
+            print("Record DELETED.")
+        else:
+            print("Deletion CANCELLED...")
+    else:
+        print("Student NOT FOUND")
+    print("------------------------------")
+    return deleted
 
 def displayall()->None:
     toplabel("Display All Student")
@@ -47,7 +65,7 @@ def displayall()->None:
     
     
 def quit()->None:
-    print("program terminates...")
+    print("Program terminated...")
 
 def toplabel(label:str)->None:
     system("cls")

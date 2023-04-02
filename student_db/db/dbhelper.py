@@ -78,7 +78,7 @@ def deleterecord(table:str,*args)->bool:
     if cursor.rowcount>0:
         ok = True
         conn.commit()
-    cursor.close
+    cursor.close()
     return ok
 
 
