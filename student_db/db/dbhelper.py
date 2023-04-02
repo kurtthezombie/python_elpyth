@@ -83,7 +83,7 @@ def deleterecord(table:str,*args)->bool:
 
 
 def main()->None:
-    ok:bool = deleterecord('student',[4])
+    ok:bool = getall('student')
     print(ok)
 
 if __name__ == "__main__":

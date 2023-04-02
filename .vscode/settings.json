@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./student_db/model",
+        "./student_db/db"
+    ]
+}
