@@ -23,7 +23,7 @@ def getall(table:str)->list:
 
 def getrecord(table:str,*args)->dict: #args a list parameter to a func
     data:dict = {}
-    sql:str = f"SELECT * FROM `{table}` WHERE `id`= %s"
+    sql:str = f"SELECT * FROM `{table}` WHERE `idno`= %s"
     conn = db_connect()
     cursor = conn.cursor(dictionary=True)
     cursor.execute(sql,args[0])
@@ -71,7 +71,7 @@ def updaterecord(table:str,**kwargs)->bool:
 
 def deleterecord(table:str,*args)->bool:
     ok:bool = False
-    sql:str = f"DELETE FROM `{table}` WHERE `id` = %s"
+    sql:str = f"DELETE FROM `{table}` WHERE `idno` = %s"
     conn = db_connect()
     cursor = conn.cursor()
     cursor.execute(sql,args[0])

@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0,'student_db/db/')
+sys.path.insert(0,'../db/')
 from dbhelper import *
 
 table:str ="student"

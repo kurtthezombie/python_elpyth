@@ -8,7 +8,7 @@ from student import *
 table = 'student'
 stlist:list = []
 
-def addstudent(**kwargs)->bool:
+def addstud(**kwargs)->bool:
     toplabel("Add Student")
     ##id = input("ID       : ")
     idno = input("IDNO     : " )
@@ -16,17 +16,18 @@ def addstudent(**kwargs)->bool:
     firstname = input("Firstname: ")
     course = input("Course   : ")
     level = input("Level    : ")
-    ok = addrecord('student', idno=idno, lastname=lastname,
-                   firstname=firstname,course=course,level=level) 
+    ok = addstudent(idno=idno, lastname=lastname,firstname=firstname,
+                course=course,level=level)
+    print("Student added...")
     return ok
 
-def findstudent(*args)->bool:
+def findstud(*args)->bool:
     toplabel("Find Student")
-    global table
-    id = int(input("ID: "))
-    ok = getrecord(table,[id])
+    ##global table
+    idno = input("IDNO: ")
+    ok = findstudent([idno])
     if ok:
-        record = getrecord(table,[id]).values()
+        record = findstudent([idno]).values()
         [print(stud, end=" ") for stud in record]
         print()
     else:
@@ -34,23 +35,26 @@ def findstudent(*args)->bool:
     print("------------------------------")
     return ok
 
-def deletestudent()->bool:
+def delstudent()->bool:
     toplabel("Delete Student")
-    delid = int(input("ID: "))
-    ok = getrecord('student',[delid])
+    idno = input("IDNO: ")
+    ok = findstudent([idno])
     if ok:
-        record = getrecord('student',[delid]).values()
+        record = findstudent([idno]).values()
         [print(stud, end=" ") for stud in record]
         print()
         ##yes or no to delete
+        print("\n")
         choice = input("Delete student record(y/n)? ").lower()
         if choice == 'y':
-            deleted = deleterecord('student', [delid])
+            deleted = deletestudent([idno])
             print("Record DELETED.")
         else:
             print("Deletion CANCELLED...")
+            deleted = False
     else:
         print("Student NOT FOUND")
+        return ok
     print("------------------------------")
     return deleted
 
@@ -86,9 +90,9 @@ def displaymenu()->None:
 
 def getmenuoption(opt:int)->None:
     menuoption:dict={
-        1:addstudent,
-        2:findstudent,
-        3:deletestudent,
+        1:addstud,
+        2:findstud,
+        3:delstudent,
         4:displayall,
         0:quit,
     }
@@ -105,7 +109,7 @@ def main()->None:
         except:
             print("Invalid Input!")
         finally:
-            input("Press any key to continue...")
+            input("Press Enter to continue...")
     
     
 if __name__=="__main__":
