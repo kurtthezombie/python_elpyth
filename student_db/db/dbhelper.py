@@ -23,10 +23,11 @@ def getall(table:str)->list:
 
 def getrecord(table:str,*args)->dict: #args a list parameter to a func
     data:dict = {}
-    sql:str = f"SELECT * FROM `{table}` WHERE `idno`= %s"
+    
+    sql:str = f"SELECT * FROM `{table}` WHERE `idno` = %s"
     conn = db_connect()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute(sql,args[0])
+    cursor.execute(sql, args[0])
     data = cursor.fetchone()
     cursor.close()
     return data
@@ -58,7 +59,7 @@ def updaterecord(table:str,**kwargs)->bool:
     for i in range(1,len(values)):
         flds.append("`"+keys[i]+"`='"+values[i]+"'")
     fields:str = ",".join(flds)
-    sql:str = f"UPDATE `{table}` SET {fields} WHERE `id` = {values[0]}" 
+    sql:str = f"UPDATE `{table}` SET {fields} WHERE `idno` = {values[1]}" 
 
     conn = db_connect()
     cursor = conn.cursor()
@@ -81,7 +82,27 @@ def deleterecord(table:str,*args)->bool:
     cursor.close()
     return ok
 
-
+def loginrecord(table, **kwargs)->bool:
+    message = "INVALID USER!"
+    values = list(kwargs.values())
+    sql = f"SELECT * FROM `{table}` WHERE `username`=%s AND `password`=%s"
+    
+    conn = db_connect()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute(sql,values)
+    data = cursor.fetchone()
+    cursor.close()
+    if data: message = "LOGIN ACCEPTED"
+    return message
+    
+"""
+    conn = db_connect()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM `users` WHERE `username`=%s AND `password`=%s", (username, password))
+    data = cursor.fetchone()
+    cursor.close()
+    return data
+"""
 def main()->None:
     ok:bool = getall('student')
     print(ok)
