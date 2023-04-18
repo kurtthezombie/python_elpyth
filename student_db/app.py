@@ -22,13 +22,13 @@ def addstud(**kwargs)->bool:
     print("Student ADDED...")
     return ok
 
-def findstud(*args)->bool:
+def findstud()->bool:
     toplabel("Find Student")
     ##global table
     idno = input("IDNO: ")
-    ok = findstudent([idno])
+    ok = findstudent(idno=idno)
     if ok:
-        record = findstudent([idno]).values()
+        record = ok.values()
         [print(stud, end=" ") for stud in record]
         print()
     else:
@@ -39,16 +39,16 @@ def findstud(*args)->bool:
 def delstudent()->bool:
     toplabel("Delete Student")
     idno = input("IDNO: ")
-    ok = findstudent([idno])
+    ok = findstudent(idno=idno)
     if ok:
-        record = findstudent([idno]).values()
+        record = ok.values()
         [print(stud, end=" ") for stud in record]
         print()
         ##yes or no to delete
         print("\n")
         choice = input("Delete student record(y/n)? ").lower()
         if choice == 'y':
-            deleted = deletestudent([idno])
+            deleted = deletestudent(idno=idno)
             print("Record DELETED.")
         else:
             print("Deletion CANCELLED...")
@@ -63,18 +63,17 @@ def updatestud()->bool:
     toplabel("Update Student")
     ##global table
     idno = input("IDNO: ")
-    ok = findstudent([idno])
+    ok = findstudent(idno=idno)
     if ok:
-        record = findstudent([idno]).values()
+        record = ok.values()
         [print(stud, end=" ") for stud in record]
         print()
-
-        idno = input("IDNO     : " )
+        
         lastname = input("Lastname : ")
         firstname = input("Firstname: ")
         course = input("Course   : ")
         level = input("Level    : ")
-        updated = updatestudent(id=id,idno=idno, lastname=lastname,firstname=firstname,
+        updated = updatestudent(id=id,idno=idno,lastname=lastname,firstname=firstname,
                         course=course,level=level)
         print("Student Record UPDATED...")
     else:

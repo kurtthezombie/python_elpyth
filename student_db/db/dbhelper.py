@@ -21,13 +21,15 @@ def getall(table:str)->list:
     cursor.close()
     return data
 
-def getrecord(table:str,*args)->dict: #args a list parameter to a func
+def getrecord(table:str,**kwargs)->dict: #args a list parameter to a func
     data:dict = {}
-    
-    sql:str = f"SELECT * FROM `{table}` WHERE `idno` = %s"
+    keys:list = list(kwargs.keys())
+    values:list = list(kwargs.values())
+    ##flds:str = "`=%s and `".join(keys)+"`=%s"
+    sql:str = f"SELECT * FROM `{table}` WHERE `{keys[0]}`='{values[0]}'"
     conn = db_connect()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute(sql, args[0])
+    cursor.execute(sql)
     data = cursor.fetchone()
     cursor.close()
     return data
@@ -70,12 +72,15 @@ def updaterecord(table:str,**kwargs)->bool:
     cursor.close()
     return ok
 
-def deleterecord(table:str,*args)->bool:
+def deleterecord(table:str,**kwargs)->bool:
     ok:bool = False
-    sql:str = f"DELETE FROM `{table}` WHERE `idno` = %s"
+    keys:list = list(kwargs.keys())
+    values:list = list(kwargs.values())
+    
+    sql:str = f"DELETE FROM `{table}` WHERE `{keys[0]}` ='{values[0]}'"
     conn = db_connect()
     cursor = conn.cursor()
-    cursor.execute(sql,args[0])
+    cursor.execute(sql)
     if cursor.rowcount>0:
         ok = True
         conn.commit()

@@ -11,14 +11,14 @@ def userlogin(table:str,**kwargs)->str:
     return message
 
 def adduser(**kwargs)->bool:     return addrecord(table,**kwargs)
-def finduser(*args)->bool:       return getrecord(table,*args)
+def finduser(**kwargs)->bool:       return getrecord(table,**kwargs)
 def getalluser()->list:          return getall(table)
 def updateuser(**kwargs)->bool:  return updaterecord(table,**kwargs)
-def deleteuser(*args)->bool:     return deleterecord(table,*args)
+def deleteuser(**kwargs)->bool:     return deleterecord(table,**kwargs)
 def loginuser(**kwargs)->bool:      return loginrecord(table, **kwargs)   
 
 def main():
-    message = loginuser(username='admin', password='user')
+    message = finduser(username='admin', password='user')
     print(message)
 
 if __name__ == "__main__":
