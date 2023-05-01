@@ -2,8 +2,7 @@
 {% block title %}{{ title | upper}}{% endblock %}
 {% block header %}{{ title | upper}}{% endblock %}
 {% block content %}
-    <button class="w3-button w3-blue" 
-    onclick="document.getElementById('modal').style.display ='block'">
+    <button class="w3-button w3-blue" onclick="add_btn()">
         +ADD
     </button><br><br>
     <table class="w3-table-all">
@@ -33,7 +32,8 @@
             <div class="w3-container w3-blue">
                 <h3>STUDENT</h3>
                 <button class="w3-button w3-display-topright" onclick="
-                    document.getElementById('modal').style.display ='none'
+                    document.getElementById('modal').style.display ='none';
+                    resetForm();
                 ">&times;</button>
             </div>
             <div class="w3-container">
@@ -79,6 +79,15 @@
         </div>
     </div>
    <script>
+        function add_btn() {
+            
+            document.getElementById('modal').style.display ='block';
+            document.getElementsByName("flag")[0].value=0;
+            document.getElementsByName("idno")[0].focus();
+            document.getElementsByName("idno")[0].value=null
+            document.getElementsByName("idno")[0].disabled=false;
+
+        }
         function delete_student(idno) {
             var ok = confirm("Delete this Student? =>"+idno)
             if (ok)
@@ -86,13 +95,17 @@
         }
 
         function edit_student(idno,lastname,firstname,course,level) {
-            document.getElementsByName("idno").value=idno
+            document.getElementsByName("flag")[0].value=1;
+            document.getElementsByName("idno")[0].value=idno
+            document.getElementsByName("idno")[0].readOnly=true;
             document.getElementsByName("lastname").value=lastname
             document.getElementsByName("firstname").value=firstname
             document.getElementsByName("course").value=course
             document.getElementsByName("level").value=level
             document.getElementById('modal').style.display='block'
+            document.getElementsByName("lastname")[0].focus();
         }
+        
     </script>
 
 {% endblock %}

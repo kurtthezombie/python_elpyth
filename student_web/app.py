@@ -27,7 +27,6 @@ slist:list = [
     }
 ]
 
-
 @app.route("/deletestudent",methods=["GET"])
 def deletestudent():
     idno:str = request.args.get("idno")
@@ -40,23 +39,23 @@ def deletestudent():
 
 @app.route("/savestudent",methods=["POST"])
 def savestudent():
-    flag:int= request.form["flag"]
+    flag:int= int(request.form["flag"])
     idno:str = request.form["idno"]
     lastname:str = request.form["lastname"]
     firstname:str = request.form["firstname"]
     course:str = request.form["course"]
     level:str = request.form["level"]
     
-    for student in slist:
-        if student["idno"]==idno:
-            student['lastname'] = lastname
-            student['firstname'] = firstname
-            student['course'] = course
-            student['level'] = level
-            break
-
+    if flag == 1:
+        for student in slist:
+            if student["idno"]==idno:
+                student['lastname'] = lastname
+                student['firstname'] = firstname
+                student['course'] = course
+                student['level'] = level
+                break
     else:
-        slist.append({
+        slist.append({  
             "idno":idno,
             "lastname":lastname,
             "firstname":firstname,
