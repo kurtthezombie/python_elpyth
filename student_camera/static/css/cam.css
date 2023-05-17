@@ -1,0 +1,17 @@
+#my_camera{
+    width: 320px;
+    height: 240px;
+    border: 1px solid #c0c0c0;
+}
+
+#camera-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#camera-buttons-container {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
